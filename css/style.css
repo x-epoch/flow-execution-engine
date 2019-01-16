@@ -1,0 +1,33 @@
+* {
+    cursor: default;
+}
+body {
+    margin: 0;
+    overflow: hidden;
+}
+#menu {
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+    position: absolute;
+    width: 100%;
+}
+a {
+    float: left;
+    padding: .5em;
+    text-decoration: none;
+    color: white;
+    font-family: monospace;
+    cursor: pointer;
+}
+a img {
+    cursor: pointer;
+}
+a:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+#fps {
+    font-family: monospace;
+    color: white;
+    float: right;
+    padding: .5em;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flowedit</title>
+    <link rel="stylesheet" href="css/style.css">
+  
+    
+</head>
+<body>
+
+    <div id="menu">
+    	<textarea id="flow_script" style="margin: 0px; width: 100%; height: 55px;">    </textarea>  
+    	<textarea id="output" style="margin: 0px; width: 49%; height: 55px;">    </textarea>  <textarea id="render" style="margin: 0px; width: 49%; height: 55px;">    </textarea>  
+        
+       	<button id="renderBtn"  style="margin: 0px; width: 100%; height: 20px;">Generate Layout</button>
+        
+        <a href="#" onclick="addObject(0, 100, 120)">Process</a>
+        <a href="#" onclick="addObject(2, 100, 120)">Data</a>
+        <a href="#" onclick="addObject(3, 100, 120)">Predefined process</a>
+        <a href="#" onclick="addObject(1, 100, 120)">Decision</a>
+        <a href="#" onclick="addObject(4, 100, 120)">Cycle1</a>
+        <a href="#" onclick="addObject(5, 100, 120)">Cycle2</a>
+        <a href="#" onclick="addObject(6, 100, 120)">Terminator</a>
+        <a href="#" onclick="addLine()">Line</a>
+        <label id="fps">Alpha</label>
+    </div>
+    <canvas id="canvas"></canvas>
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+    <script src="js/diagram.js"></script>
+    <script src="js/interaction.js"></script>
+    <script src="js/scripts.js"></script>
+    <script>
+    
+    var flow_script = document.getElementById("flow_script");
+    flow_script.onkeypress = function(e){
+    	render(document.getElementById("flow_script").value);
+    	$("#output").html(JSON.stringify(diagram.getAll()));
+    }
+    
+    $("#renderBtn").click(function(){
+    	var overall = JSON.parse($("#render").val())
+    	diagram.reset();
+    	$.each(overall.objects, function(key,object){      
+    		diagram.addObject(object.type, object.id, object.x, object.y);
+      	})
+      	
+      	$.each(overall.lines, function(index,line){      
+    		diagram.addLine(line.from, line.to, line.positions);
+      	})
+      	diagram.render();
+  	});   
+    </script>
+</body>
+</html>
